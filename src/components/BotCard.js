@@ -1,7 +1,9 @@
 import React from "react";
 
+
 const BotCard = props => {
   const { bot } = props;
+  console.log(bot)
 
   let botType;
 
@@ -19,12 +21,24 @@ const BotCard = props => {
       botType = <div />;
   }
 
+  const enlistBot = () => {
+    props.enlistBot(bot)
+  }
+
+  const dischargeBot = () => {
+    props.dischargeBot(bot)
+  }
+
   return (
     <div className="ui column">
       <div
         className="ui card"
         key={bot.id}
-        onClick={() => console.log("add code to connect event listener")}
+        onClick={props.enlisted ?
+          dischargeBot
+          :
+          enlistBot
+        }
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
@@ -56,7 +70,6 @@ const BotCard = props => {
       </div>
     </div>
   );
-
 };
 
 export default BotCard;
