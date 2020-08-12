@@ -15,30 +15,27 @@ class BotsPage extends React.Component {
       .then((bots) => this.setState({ bots }));
   }
 
-  addBotToArmy = (id) => {
-    const copyBots = [...this.state.bots];
-    copyBots.map((bot) => {
-      if (bot.id === id) {
-        const army = [...this.state.army];
-        army.push(bot);
-        this.setState({ army });
-      }
-    });
-    const bots = copyBots.filter((bot) => bot.id !== id);
-    this.setState({ bots });
+  addBotToArmy = (bot) => {
+    const army = [...this.state.army];
+    army.push(bot);
+    this.setState({ army });
   };
+
+  // handleClick = (id) => {
+  //   const army = [...this.state.army];
+  //   army.filter((bot) => bot.id !== id);
+  //   this.setState({ army });
+  // };
 
   render() {
     return (
-      <React.Fragment>
-        <div>
-          <YourBotArmy army={this.state.army} />;
-          <BotCollection
-            addBotToArmy={this.addBotToArmy}
-            bots={this.state.bots}
-          />
-        </div>
-      </React.Fragment>
+      <div>
+        <YourBotArmy handleClick={this.handleClick} army={this.state.army} />;
+        <BotCollection
+          addBotToArmy={this.addBotToArmy}
+          bots={this.state.bots}
+        />
+      </div>
     );
   }
 }
