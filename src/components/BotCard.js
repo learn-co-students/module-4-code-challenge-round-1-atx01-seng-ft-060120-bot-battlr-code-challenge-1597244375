@@ -26,10 +26,10 @@ const BotCard = props => {
         key={bot.id}
         onClick={() => {
           if(!props.enlisted.includes(bot)) {
-          props.enlist(bot)}
-          else {
-          props.discharge(bot)
-        }
+            props.enlist(bot)
+          } else {
+            props.discharge(bot)
+          }
       }} >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />

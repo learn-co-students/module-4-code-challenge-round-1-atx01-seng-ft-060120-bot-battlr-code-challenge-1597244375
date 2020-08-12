@@ -1,13 +1,17 @@
 import React from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from './YourBotArmy'
+import Search from './Search'
 
 class BotsPage extends React.Component {
   //start here with your code for step one
 
   state = {
     allBots: [], 
-    enlisted: []
+    enlisted: [],
+    input: '',
+    // empty: true,
+    // display: false
   }
 
   componentDidMount() {
@@ -27,25 +31,37 @@ class BotsPage extends React.Component {
       if (index > -1) {
         this.setState({ array: array.splice(index, 1) })
       }
-
     }
 
+    input = event => {
+      this.setState({ input: event.target.value })
+    }
+
+    // triggerToggle = () => {
+    //   this.setState({
+    //     empty: false,
+    //     display: true
+    //   })
+    // }
+
   render() {
-   
+    const botSearch = this.state.allBots.filter(bots => 
+      bots.name.includes(this.state.input))
     return (
       <div>
-        {     
-        <YourBotArmy 
+        {<YourBotArmy 
         armyBots={this.state.enlisted}
         discharge={this.discharge}
-        enlisted={this.state.enlisted} /> 
-        }
-        {
-        <BotCollection 
-        bots={this.state.allBots}
+        enlisted={this.state.enlisted} />}
+        {<Search input={this.input} />}
+        {<BotCollection 
+        bots={botSearch}
         enlist={this.enlist}
-        enlisted={this.state.enlisted} />
-        }
+        enlisted={this.state.enlisted}
+        // empty={this.state.empty}
+        // display={this.state.display}
+        // toggle={this.triggerToggle} 
+        />}
         
       </div>
     );
