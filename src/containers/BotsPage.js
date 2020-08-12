@@ -2,7 +2,7 @@ import React from "react";
 import YourBotArmy from "./YourBotArmy";
 import BotCollection from "./BotCollection";
 import BotSpecs from "../components/BotSpecs";
-import Search from "../components/Search";
+import FilterOptions from "../components/FilterOptions";
 
 const API = "https://bot-battler-api.herokuapp.com/api/v1/bots"
 
@@ -73,11 +73,34 @@ class BotsPage extends React.Component {
     }
   }
 
+  /* In retrospect, I wish I had made this a dropdown instead of buttons to keep the code dry */
+
+  sortHealth = () => {
+    const sorted = this.state.currentBots.sort((a, b) => b.health - a.health)
+    this.setState({
+      currentBots: sorted
+    })
+  }
+
+  sortDamage = () => {
+    const sorted = this.state.currentBots.sort((a, b) => b.damage - a.damage)
+    this.setState({
+      currentBots: sorted
+    })
+  }
+
+  sortArmor = () => {
+    const sorted = this.state.currentBots.sort((a, b) => b.armor - a.armor)
+    this.setState({
+      currentBots: sorted
+    })
+  }
+
   render() {
     return (
       <div>
         <YourBotArmy botArmy={this.state.botArmy} removeBotFromArmy={this.removeBotFromArmy}/>
-        <Search searchBots={this.searchBots}/>
+        <FilterOptions searchBots={this.searchBots} sortHealth={this.sortHealth} sortDamage={this.sortDamage} sortArmor={this.sortArmor}/>
         {this.state.collectionVisible ? <BotCollection bots={this.state.currentBots} addBotToSpec={this.addBotToSpec}/> : <BotSpecs bot={this.state.specBot} goBackButton={this.goBackButton} addBotToArmy={this.addBotToArmy}/> }
       </div>
     );
