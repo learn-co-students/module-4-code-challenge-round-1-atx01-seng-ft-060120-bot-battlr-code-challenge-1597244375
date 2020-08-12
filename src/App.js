@@ -3,7 +3,10 @@ import BotsPage from "./containers/BotsPage";
 import "./App.css";
 
 class App extends Component {
+
+  
   render() {
+  
     return (
       <div className="App">
         <BotsPage />
@@ -11,5 +14,6 @@ class App extends Component {
     );
   }
 }
+  
 
 export default App;
