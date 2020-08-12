@@ -1,12 +1,25 @@
 import React from "react";
+import BotCollection from "./BotCollection";
+import YourBotArmy from "./YourBotArmy";
 
 class BotsPage extends React.Component {
-  //start here with your code for step one
+  
+  state = {
+    bots: this.props.bots,
+    army: []
+  }
+
+  enlistBot = (bot) => {
+    if(!this.state.army.includes(bot)){this.setState({...this.state.army.push(bot)})}
+  }
 
   render() {
     return (
       <div>
-        {/* put your components here */}
+          <YourBotArmy army={this.state.army} enlistBot={this.enlistBot} />
+        {
+          <BotCollection bots={this.props.bots} enlistBot={this.enlistBot} army={this.state.army} />
+        }
       </div>
     );
   }
